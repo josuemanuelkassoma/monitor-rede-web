@@ -1,7 +1,0 @@
-flask
-flask-cors
-gunicorn
-speedtest-cli
-psutil
-python-nmap
-requests
