@@ -6,13 +6,14 @@ function Dispositivos() {
   const [maquina, setMaquina] = useState(null);
   const [loading, setLoading] = useState(false);
   const dataAtual = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+  const API_URL = "https://mynetwork-egj2.onrender.com";
 
   const carregarDispositivos = async () => {
     setLoading(true);
     setDispositivos([]); // Limpa a tabela enquanto busca os novos dados
 
     try {
-      const res = await axios.get('http://localhost:5000/devices');
+      const res = await axios.get(`${API_URL}/devices`);
       setDispositivos(res.data.dispositivos || []);
     } catch (error) {
       console.error('Erro ao buscar dispositivos:', error);
@@ -22,7 +23,7 @@ function Dispositivos() {
   };
 
   useEffect(() => {
-    axios.get('http://localhost:5000/maquina')
+    axios.get(`${API_URL}/maquina`)
       .then(res => setMaquina(res.data))
       .catch(err => console.error("Erro ao buscar info da máquina:", err));
     carregarDispositivos();

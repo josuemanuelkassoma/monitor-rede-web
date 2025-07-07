@@ -17,6 +17,7 @@ function Historico() {
   const [tipoSelecionado, setTipoSelecionado] = useState('dispositivos');
   const [dados, setDados] = useState([]);
   const [periodo, setPeriodo] = useState('todos');
+  const API_URL = "https://mynetwork-egj2.onrender.com";
 
   useEffect(() => {
     buscarHistorico(tipoSelecionado);
@@ -26,16 +27,16 @@ function Historico() {
     let url = '';
     switch (tipo) {
       case 'dispositivos':
-        url = 'http://localhost:5000/devices/db';
+       url = `${API_URL}/devices/db`;
         break;
       case 'speedtest':
-        url = 'http://localhost:5000/speedtest/historico';
+       url = `${API_URL}/speedtest/historico`;
         break;
       case 'trafego':
-        url = 'http://localhost:5000/trafego/historico';
+        url = `${API_URL}/trafego/historico`;
         break;
       case 'sessoes':
-        url = 'http://localhost:5000/trafego/sessoes';
+        url = `${API_URL}/trafego/sessoes`;
         break;
     }
 
@@ -105,7 +106,7 @@ function Historico() {
     }
   
     try {
-      await axios.delete(`http://localhost:5000${rota}`);
+      await axios.delete(`${API_URL}${rota}`);
       alert(`Histórico de ${tipoSelecionado} apagado com sucesso.`);
       buscarHistorico(tipoSelecionado);
     } catch (error) {

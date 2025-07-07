@@ -8,15 +8,17 @@ function Dashboard() {
   const [maquina, setMaquina] = useState(null);
   const [dispositivos, setDispositivos] = useState([]);
   const [botaoAtivo, setBotaoAtivo] = useState(null);
+  const API_URL = "https://mynetwork-egj2.onrender.com";
+
 
   useEffect(() => {
     // Busca info da máquina local
-    axios.get('http://localhost:5000/maquina')
+       axios.get(`${API_URL}/maquina`)
       .then(res => setMaquina(res.data))
       .catch(err => console.error("Erro ao buscar info da máquina:", err));
 
     // Busca dispositivos na mesma rede
-    axios.get('http://localhost:5000/dispositivos/rede')
+    axios.get(`${API_URL}/dispositivos/rede`)
       .then(res => {
         // Se a resposta vier dentro de um campo 'dispositivos', use-o
         const lista = Array.isArray(res.data)

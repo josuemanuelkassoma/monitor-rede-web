@@ -7,10 +7,11 @@ function SessoesTrafego() {
   const [duracao, setDuracao] = useState(0);
   const [maquina, setMaquina] = useState(null);
   const intervalRef = useRef(null);
+  const API_URL = "https://mynetwork-egj2.onrender.com";
 
   // Busca info da máquina
   useEffect(() => {
-    axios.get('http://localhost:5000/maquina')
+    axios.get(`${API_URL}/maquina`)
       .then(res => setMaquina(res.data))
       .catch(() => {});
   }, []);
@@ -39,13 +40,13 @@ function SessoesTrafego() {
   };
 
   const iniciarSessao = async () => {
-    const res = await axios.post('http://localhost:5000/trafego/sessao/iniciar');
+    const res = await axios.post(`${API_URL}/trafego/sessao/iniciar`);
     setSessao({ inicio: res.data.inicio });
     setDuracao(0);
   };
 
   const finalizarSessao = async () => {
-    const res = await axios.post('http://localhost:5000/trafego/sessao/finalizar');
+    const res = await axios.post(`${API_URL}/trafego/sessao/finalizar`);
     setSessao(prev => ({
       ...prev,
       fim: res.data.fim,

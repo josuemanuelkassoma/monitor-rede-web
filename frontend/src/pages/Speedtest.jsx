@@ -6,9 +6,10 @@ function Speedtest() {
   const [velocidade, setVelocidade] = useState(null);
   const [carregando, setCarregando] = useState(false);
   const [maquina, setMaquina] = useState(null);
+  const API_URL = "https://mynetwork-egj2.onrender.com";
 
   useEffect(() => {
-    axios.get("http://localhost:5000/maquina")
+   axios.get(`${API_URL}/maquina`)
       .then(res => setMaquina(res.data))
       .catch(() => setMaquina(null));
   }, []);
@@ -18,7 +19,7 @@ function Speedtest() {
     setVelocidade(null);
 
     try {
-      const res = await axios.get('http://localhost:5000/speedtest_module');
+      const res = await axios.get(`${API_URL}/speedtest_module`);
       setVelocidade(res.data.velocidade);
     } catch {
       setVelocidade({ erro: 'Erro ao executar teste de velocidade.' });

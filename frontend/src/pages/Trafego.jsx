@@ -6,10 +6,11 @@ function Trafego() {
   const [trafego, setTrafego] = useState(null);
   const [carregando, setCarregando] = useState(false);
   const [maquina, setMaquina] = useState(null);
+  const API_URL = "https://mynetwork-egj2.onrender.com";
 
   useEffect(() => {
     // obter info da máquina local
-    axios.get('http://localhost:5000/maquina')
+    axios.get(`${API_URL}/maquina`)
       .then(res => setMaquina(res.data))
       .catch(() => setMaquina(null));
   }, []);
@@ -19,7 +20,7 @@ function Trafego() {
     setTrafego(null);
 
     try {
-      const res = await axios.get('http://localhost:5000/trafego');
+      const res = await axios.get(`${API_URL}/trafego`);
       setTrafego(res.data.trafego);
     } catch {
       setTrafego({ erro: 'Erro ao medir tráfego.' });
